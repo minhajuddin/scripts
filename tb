@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+#changes input number to a bit representation
+
+number = ARGV.first.to_i
+bin = number.to_s(2)
+
+length = bin.length
+
+rem = length % 4
+padding = (rem == 0 ? 0 : 4 - rem)
+
+final = ( '0' * padding  ) + bin
+
+puts final.scan(/.{4}/).join(' ')
