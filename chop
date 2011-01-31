@@ -1,0 +1,5 @@
+#!/bin/sh -x
+#source => http://object.io/site/2011/01/meet-chop/
+CURRENT_BRANCH=$(git branch | grep '\*')
+git checkout ${1:-"master"} || exit 1
+git branch -d ${CURRENT_BRANCH:2}
