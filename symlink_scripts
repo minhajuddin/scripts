@@ -4,9 +4,11 @@
 bin_dir = '/usr/local/bin'
 files = `git ls-files`.lines
 
-files.each do |f|
-  f = f.strip
-  target_path = File.join(File.dirname(__FILE__), f)
+files = files.to_a.collect {|f| f.strip}
+ignore = ['README', 'login.sh', 'logout.sh', 'symlink_scripts']
+
+(files - ignore).each do |f|
+  target_path = File.expand_path(File.join(File.dirname(__FILE__), f))
   source_path =  File.join(bin_dir, f)
   puts `ln -ns #{target_path} #{source_path}`
 end
